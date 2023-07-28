@@ -48,6 +48,7 @@ RUN curl -L -o ~/miniconda.sh -O https://repo.continuum.io/miniconda/Miniconda3-
 ENV PATH /opt/conda/envs/py$PYTHON_VERSION/bin:$PATH
 
 # Install chainer under conda environment
+RUN pip install --upgrade pip setuptools wheel
 RUN pip install cupy==4.0.0b3 chainer==4.0.0b3
 
 # Clone chainer repository
@@ -56,7 +57,7 @@ RUN git clone https://github.com/chainer/chainer.git /opt/chainer
 # Install some additional packages ..
 RUN pip install tensorflow tensorboard tensorboardX \
     geopandas==0.3.0 Rtree==0.8.3 centerline==0.3 osmnx==0.6 \
-    opencv-python tqdm
+    opencv-python==3.4.0.14 tqdm
 
 # Setup jupyter
 RUN jupyter notebook --generate-config && \
